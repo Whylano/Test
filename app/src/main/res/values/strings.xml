@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="fab_description">Scroll to top</string>
+    <string name="search">검색</string>
+    <string name="search_toggle">검색 전환</string>
+
+</resources>
