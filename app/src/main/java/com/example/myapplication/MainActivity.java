@@ -85,59 +85,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // API 호출 및 JSON 데이터 가져오기
-    private String fetchJSONData(String apiUrl) {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            //매개변수로 주어진 API URL을 사용하여 연결을 설정
-            URL url = new URL(apiUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            //GET 요청 메서드를 설정
-            connection.setRequestMethod("GET");
-            //데이터 읽어옴
-            InputStream inputStream = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            //예외
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-
-                    //예외
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        //stringBuilder 문자열반환
-        return stringBuilder.toString();
-    }
-
     // 이미지들을 SecondActivity로 전달하여 표시
     private void displayImages(ArrayList<String> imageUrls) {
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
         intent.putStringArrayListExtra("imageUrls", imageUrls);
-        startActivity(intent);
-    }
-
-    // 이미지 URL과 상품명들을 TheRebornActivity로 전달하여 표시
-    private void displayImagesAndNames(ArrayList<String> productImgUrls, ArrayList<String> goodsNames, ArrayList<String> detailImageUrls) {
-        Intent intent = new Intent(MainActivity.this, TheRebornActivity.class);
-        intent.putStringArrayListExtra("productImgUrl", productImgUrls);
-        intent.putStringArrayListExtra("goodsNames", goodsNames);
-        intent.putStringArrayListExtra("detailImageUrls", detailImageUrls); // 추가: detail_img_url 전달*/
         startActivity(intent);
     }
 }
