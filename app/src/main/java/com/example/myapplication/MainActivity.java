@@ -1,14 +1,12 @@
 package com.example.myapplication;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.common.NetworkUtils;
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.model.Reborn;
 
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     // API 호출 및 JSON 데이터 가져오기
                     String apiUrl = "https://api.inventory.wisethan.com/catalogue/daemyung-online/getAll";
-                    final String jsonData = fetchJSONData(apiUrl);
+                    String jsonData = NetworkUtils.fetchJSONData(apiUrl);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -77,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     // Button2ClickListener 클래스
     class Button2ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-        startActivity(new Intent(MainActivity.this,TheRebornActivity.class));
+            Intent intent = new Intent(MainActivity.this, TheRebornActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-          //예외
+            //예외
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     reader.close();
 
-                  //예외
+                    //예외
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -133,7 +133,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 이미지 URL과 상품명들을 TheRebornActivity로 전달하여 표시
-    private void displayImagesAndNames(ArrayList<Reborn> product) {
-
+    private void displayImagesAndNames(ArrayList<String> productImgUrls, ArrayList<String> goodsNames, ArrayList<String> detailImageUrls) {
+        Intent intent = new Intent(MainActivity.this, TheRebornActivity.class);
+        intent.putStringArrayListExtra("productImgUrl", productImgUrls);
+        intent.putStringArrayListExtra("goodsNames", goodsNames);
+        intent.putStringArrayListExtra("detailImageUrls", detailImageUrls); // 추가: detail_img_url 전달*/
+        startActivity(intent);
     }
 }

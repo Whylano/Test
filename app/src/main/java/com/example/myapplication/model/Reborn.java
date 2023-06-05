@@ -1,14 +1,15 @@
 package com.example.myapplication.model;
 
 public class Reborn {
+
     private String productImgUrl;
+    private String detailImgUrl;
     private String goodsName;
-    private String detailUrl;
-    public Reborn(){}
-    public Reborn(String productImgUrl, String goodsName, String detailUrl) {
+
+    public Reborn(String productImgUrl, String detailImgUrl, String goodsName) {
         this.productImgUrl = productImgUrl;
+        this.detailImgUrl = detailImgUrl;
         this.goodsName = goodsName;
-        this.detailUrl = detailUrl;
     }
 
     public String getProductImgUrl() {
@@ -19,6 +20,14 @@ public class Reborn {
         this.productImgUrl = productImgUrl;
     }
 
+    public String getDetailImgUrl() {
+        return detailImgUrl;
+    }
+
+    public void setDetailImgUrl(String detailImgUrl) {
+        this.detailImgUrl = detailImgUrl;
+    }
+
     public String getGoodsName() {
         return goodsName;
     }
@@ -26,14 +35,5 @@ public class Reborn {
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
-
-    public String getDetailUrl() {
-        return detailUrl;
-    }
-
-    public void setDetailUrl(String detailUrl) {
-        this.detailUrl = detailUrl;
-    }
-
 
 }
