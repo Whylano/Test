@@ -2,8 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_sky_blue">#00BFFF</color>
-    <color name="bright_blue">#3366FF</color>
-    <color name="navy_blue">#000080</color>
-    <color name="colorAccent">#FF0000</color>
+    <color name="bright_navy">#6E7BEF</color>
+    <color name="navy_blue">#27B7CF</color>
+    <color name="navy">#1C2484</color>
+    <color name ="transparent">#00000000</color>
+    <color name ="orange">#ff7f00</color>
+    <color name="light_orange">#ffe082</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>

@@ -1,7 +1,15 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">베스트리퍼 수원</string>
     <string name="fab_description">Scroll to top</string>
     <string name="search">검색</string>
-    <string name="search_toggle">검색 전환</string>
-
+    <string name="search_title">검색 전환</string>
+    <string name="search_hint">검색</string>
+    <string name="search_toggle">검색 시도</string>
+    <string name="search_name">검색어를 입력하세요</string>
+    <string name="online_order_title">온라인주문</string>
+    <string name="the_reborn_title">THE리:본</string>
+    <string name="boram_FSA_title">보람상조</string>
+    <string name="the_reborn_img">더리본 이미지</string>
+    <string name="boram_img">보람 이미지</string>
+    <string name="login_button">로그인</string>
 </resources>

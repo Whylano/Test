@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/companyLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="240dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="240dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/company_logo" />
+
+        <Button
+            android:id="@+id/online_order"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginStart="240dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="240dp"
+            android:background="@drawable/ic_radius"
+            android:backgroundTint="@color/navy_blue"
+            android:text="@string/online_order_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            tools:ignore="VisualLintButtonSize" />
+
+
+        <Button
+            android:id="@+id/the_reborn"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginStart="240dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="240dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_radius"
+            android:backgroundTint="@color/bright_navy"
+            android:text="@string/the_reborn_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            tools:ignore="VisualLintButtonSize" />
+
+        <Button
+            android:id="@+id/boram"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginStart="240dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="240dp"
+            android:background="@drawable/ic_radius"
+            android:backgroundTint="@color/navy"
+            android:text="@string/boram_FSA_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:cornerRadius="100dp"
+            tools:ignore="VisualLintButtonSize" />
+    </LinearLayout>
+</ScrollView>
