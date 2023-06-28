@@ -12,4 +12,5 @@
     <string name="the_reborn_img">더리본 이미지</string>
     <string name="boram_img">보람 이미지</string>
     <string name="login_button">로그인</string>
+    <string name ="edit_Onlineitem">온라인주문 수정</string>
 </resources>

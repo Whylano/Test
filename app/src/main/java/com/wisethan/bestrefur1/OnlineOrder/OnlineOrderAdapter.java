@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.wisethan.bestrefur1.R;
 import com.wisethan.bestrefur1.OnlineOrder.model.OnlineOrderUrl;
+import com.wisethan.bestrefur1.R;
 
 import java.util.List;
 
@@ -44,11 +44,15 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position/* 현재 아이템의 위치*/) {
         // 이미지 URL 가져오기
         OnlineOrderUrl onlineOrderUrl = onlineOrderUrlsList.get(position);
+
         // Glide를 사용하여 이미지 로딩 (필요에 따라 커스터마이즈 가능)
         Glide.with(holder.itemView.getContext())
                 .load(onlineOrderUrl.getOnlineOrderUrl())
                 .apply(new RequestOptions().override(Target.SIZE_ORIGINAL))
+                .fitCenter()
                 .into(holder.photoView);
+
+        holder.itemView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
     }
 
     //이미지 URL의 개수가 리사이클러뷰의 아이템 개수로 사용
@@ -57,6 +61,8 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
         // 이미지 URL의 개수 반환
         return onlineOrderUrlsList.size();
     }
+
+
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
 

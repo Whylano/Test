@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <!--android:screenOrientation="portrait"  // 세로로 고정
+        android:screenOrientation="landscape" // 가로로 고정-->
     <application
         android:allowBackup="true"
 
@@ -18,7 +19,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
-
+        <provider android:name=".MySuggestionProvider"
+            android:authorities="com.wisethan.bestrefur1.MySuggestionProvider" />
         <!--소수의 높은 해상도 이미지 파일 때문에
         'trying to draw too large bitmap' 문제를 해결하고자 'hardwareAccelerated'='false'로 하드웨어 가속을 해제함
         android:hardwareAccelerated="false"
@@ -27,10 +29,10 @@
          그러나 하드웨어 가속은 모든 2D 그리기 작업에 지원되지 않으므로 사용 설정하면 일부 맞춤 보기 또는 그리기 호출에 영향을 줄 수 있었고.
          일반적으로 문제는 보이지 않는 요소, 예외 또는 잘못 렌더링된 픽셀로 표시되는 사이드 임팩트 문제로 보류
          boc= https://developer.android.com/guide/topics/graphics/hardware-accel?hl=ko#controlling-->
+
         <activity
             android:name="com.wisethan.bestrefur1.common.SplashActivity"
             android:exported="true"
-            android:screenOrientation="fullSensor"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,15 +43,22 @@
 
         <activity
             android:name="com.wisethan.bestrefur1.OnlineOrder.OnlineOrderActivity"
-            android:parentActivityName="com.wisethan.bestrefur1.MainActivity">
+            android:parentActivityName="com.wisethan.bestrefur1.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="fullUser">
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wisethan.bestrefur1.MainActivity" />
         </activity>
-        <activity android:name="com.wisethan.bestrefur1.MainActivity"/>
+
+        <activity android:name="com.wisethan.bestrefur1.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="fullUser"/>
+
         <activity
             android:name="com.wisethan.bestrefur1.RebornOrder.TheRebornActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:label="The Reborn Activity">
             <intent-filter>
@@ -63,6 +72,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name="com.wisethan.bestrefur1.RebornOrder.TheRebornDetailActivity"
             android:label="The DetailActivity">
@@ -71,8 +81,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wisethan.bestrefur1.RebornOrder.TheRebornActivity" />
         </activity>
+
         <activity
             android:name="com.wisethan.bestrefur1.BoramOrder.BoramActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="The Reborn Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -81,6 +93,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
         <activity
             android:name="com.wisethan.bestrefur1.BoramOrder.BoramDetailActivity"
             android:label="The DetailActivity">

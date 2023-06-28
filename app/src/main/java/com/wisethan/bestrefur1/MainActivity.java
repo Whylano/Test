@@ -1,11 +1,9 @@
 package com.wisethan.bestrefur1;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,16 +37,6 @@ public class MainActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.hide();
     }
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-
-        }
-    }
-
 
     // OnlineOrderButtonClickListener 클래스
     class OnlineOrderButtonClickListener implements View.OnClickListener {

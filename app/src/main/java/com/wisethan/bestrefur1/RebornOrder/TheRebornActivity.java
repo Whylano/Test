@@ -31,6 +31,7 @@ public class TheRebornActivity extends AppCompatActivity {
     private ArrayList<Reborn> rebornsList;
     protected Context mContext;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

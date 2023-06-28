@@ -1,7 +1,10 @@
 package com.wisethan.bestrefur1.BoramOrder;
 
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wisethan.bestrefur1.BoramOrder.model.Boram;
+import com.wisethan.bestrefur1.MySuggestionProvider;
 import com.wisethan.bestrefur1.R;
 import com.wisethan.bestrefur1.common.NetworkUtils;
 import com.wisethan.bestrefur1.databinding.ActivityBoramBinding;
@@ -52,6 +56,15 @@ public class BoramActivity extends AppCompatActivity {
         FloatingActionButton fabScrollTop = findViewById(R.id.fab_scroll_top);
         fabScrollTop.setOnClickListener(v -> binding.theBornRecyclerView.smoothScrollToPosition(0));
 
+
+        Intent intent  = getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                    MySuggestionProvider.AUTHORITY, MySuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

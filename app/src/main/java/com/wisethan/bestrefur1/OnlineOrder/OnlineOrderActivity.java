@@ -2,12 +2,12 @@ package com.wisethan.bestrefur1.OnlineOrder;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.res.Configuration;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 public class OnlineOrderActivity extends AppCompatActivity {
 
     private ActivityOnlineOrderBinding binding;
@@ -32,12 +33,14 @@ public class OnlineOrderActivity extends AppCompatActivity {
 
     private OnlineOrderAdapter adapter;
 
+    private Context mContext;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         // 툴바 설정
         //setSupportActionBar(binding.toolbar);
         // Up 버튼 활성화
@@ -47,6 +50,7 @@ public class OnlineOrderActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.online_order_title);
         }
+
         imageUrlsList = new ArrayList<>();
         new Thread(() -> {
             // API 호출 및 JSON 데이터 가져오기
@@ -61,15 +65,27 @@ public class OnlineOrderActivity extends AppCompatActivity {
             binding.imageRecyclerview.smoothScrollToPosition(0);
         });
     }
+
     @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_online, menu);
+        return true;
     }
+
+    //    @Override
+//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//            // TODO : 가로 모드 일때
+//            PhotoView photoView = findViewById(R.id.photo_view);
+//            photoView.setScaleType(ImageView.ScaleType.CENTER);
+//            Log.e(TAG,"가로모드 입니다");
+//        } else
+//        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            // TODO : 세로 모드 일때
+//
+//        }
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {// 이 ID는 홈 또는 Up 버튼을 나타냅니다.
@@ -106,4 +122,5 @@ public class OnlineOrderActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    
 }
