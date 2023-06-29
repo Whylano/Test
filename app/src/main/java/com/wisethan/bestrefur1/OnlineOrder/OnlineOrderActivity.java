@@ -91,9 +91,17 @@ public class OnlineOrderActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {// 이 ID는 홈 또는 Up 버튼을 나타냅니다.
             onBackPressed();
             return true;
+        } else if (item.getItemId() == R.id.action_search) {
+            clickListener();
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
+    private void clickListener() {
+    }
+
 
     private void parseAndSetData(String jsonData) {
         try {
