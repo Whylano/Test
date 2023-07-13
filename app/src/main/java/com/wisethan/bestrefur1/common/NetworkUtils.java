@@ -1,5 +1,7 @@
 package com.wisethan.bestrefur1.common;
 
+import androidx.annotation.NonNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +12,7 @@ import java.net.URL;
 public class NetworkUtils {
 
     // API 호출 및 JSON 데이터 가져오기
+    @NonNull
     public static String fetchJSONData(String apiUrl) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;

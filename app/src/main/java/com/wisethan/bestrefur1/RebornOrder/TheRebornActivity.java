@@ -1,5 +1,6 @@
 package com.wisethan.bestrefur1.RebornOrder;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,6 +72,7 @@ public class TheRebornActivity extends AppCompatActivity {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 검색어 입력중 이벤트 제어
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
@@ -79,6 +81,7 @@ public class TheRebornActivity extends AppCompatActivity {
             }
 
             // 검색어 완료시 이벤트 제어
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
@@ -114,6 +117,10 @@ public class TheRebornActivity extends AppCompatActivity {
                 GridLayoutManager layoutManager = new GridLayoutManager(TheRebornActivity.this, 2); //GridLayoutManager로 2열설정
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(layoutManager);
+//                RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+//                if(animator instanceof SimpleItemAnimator){
+//                    ((SimpleItemAnimator)animator).setSupportsChangeAnimations(fal    se);
+//                }
             });
         } catch (JSONException e) {
             e.printStackTrace();

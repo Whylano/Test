@@ -2,7 +2,7 @@ package com.wisethan.bestrefur1.OnlineOrder;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,16 +33,13 @@ public class OnlineOrderActivity extends AppCompatActivity {
 
     private OnlineOrderAdapter adapter;
 
-    private Context mContext;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         // 툴바 설정
-        //setSupportActionBar(binding.toolbar);
+
         // Up 버튼 활성화
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -72,36 +69,19 @@ public class OnlineOrderActivity extends AppCompatActivity {
         return true;
     }
 
-    //    @Override
-//    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            // TODO : 가로 모드 일때
-//            PhotoView photoView = findViewById(R.id.photo_view);
-//            photoView.setScaleType(ImageView.ScaleType.CENTER);
-//            Log.e(TAG,"가로모드 입니다");
-//        } else
-//        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            // TODO : 세로 모드 일때
-//
-//        }
-//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {// 이 ID는 홈 또는 Up 버튼을 나타냅니다.
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
-        } else if (item.getItemId() == R.id.action_search) {
-            clickListener();
+        } else if (item.getItemId() == R.id.action_add_online) {
+            // UploadOnlineOrderActivity로 이동하는 코드
+            Intent intent = new Intent(OnlineOrderActivity.this, UploadOnlineOrderActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-    private void clickListener() {
-    }
-
 
     private void parseAndSetData(String jsonData) {
         try {
@@ -130,5 +110,4 @@ public class OnlineOrderActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
 }

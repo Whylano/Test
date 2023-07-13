@@ -1,10 +1,8 @@
 package com.wisethan.bestrefur1.BoramOrder;
 
-import android.app.SearchManager;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wisethan.bestrefur1.BoramOrder.model.Boram;
-import com.wisethan.bestrefur1.MySuggestionProvider;
 import com.wisethan.bestrefur1.R;
 import com.wisethan.bestrefur1.common.NetworkUtils;
 import com.wisethan.bestrefur1.databinding.ActivityBoramBinding;
@@ -46,8 +43,8 @@ public class BoramActivity extends AppCompatActivity {
             actionBar.setTitle(R.string.boram_FSA_title);
         }
         boramsList = new ArrayList<>();
-        new Thread(()->{
-            String apiUrl =  "https://api.inventory.wisethan.com/catalogue/boram/getAll";
+        new Thread(() -> {
+            String apiUrl = "https://api.inventory.wisethan.com/catalogue/boram/getAll";
             String jsonData = NetworkUtils.fetchJSONData(apiUrl);
             parseAndSetData(jsonData);
         }).start();
@@ -57,15 +54,8 @@ public class BoramActivity extends AppCompatActivity {
         fabScrollTop.setOnClickListener(v -> binding.theBornRecyclerView.smoothScrollToPosition(0));
 
 
-        Intent intent  = getIntent();
-
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
-                    MySuggestionProvider.AUTHORITY, MySuggestionProvider.MODE);
-            suggestions.saveRecentQuery(query, null);
-        }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mContext = getApplicationContext();
@@ -76,6 +66,7 @@ public class BoramActivity extends AppCompatActivity {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 검색어 입력중 이벤트 제어
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
@@ -84,6 +75,7 @@ public class BoramActivity extends AppCompatActivity {
             }
 
             // 검색어 완료시 이벤트 제어
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
@@ -93,6 +85,7 @@ public class BoramActivity extends AppCompatActivity {
         });
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -101,6 +94,7 @@ public class BoramActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void parseAndSetData(String jsonData) {
         try {
             JSONArray jsonArray = new JSONArray(jsonData);

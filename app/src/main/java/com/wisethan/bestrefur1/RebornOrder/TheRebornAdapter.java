@@ -2,6 +2,7 @@ package com.wisethan.bestrefur1.RebornOrder;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,15 +30,18 @@ public class TheRebornAdapter extends RecyclerView.Adapter<TheRebornAdapter.Rebo
 
     private final List<Reborn> filteredRebornList; // 필터링된 상품명 리스트
 
+    @SuppressLint("NotifyDataSetChanged")
     public TheRebornAdapter(List<Reborn> rebornsList) {
+        setHasStableIds(true);
         this.rebornsList = rebornsList;
         this.filteredRebornList = new ArrayList<>(rebornsList);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public RebornViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_the_reborn_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.the_reborn_recycler_item, parent, false);
         return new RebornViewHolder(view);
     }
 
@@ -92,6 +96,7 @@ public class TheRebornAdapter extends RecyclerView.Adapter<TheRebornAdapter.Rebo
                 return new FilterResults();
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 notifyDataSetChanged(); // 데이터 변경을 알림

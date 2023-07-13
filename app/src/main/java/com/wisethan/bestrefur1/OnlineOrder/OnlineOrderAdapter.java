@@ -1,5 +1,6 @@
 package com.wisethan.bestrefur1.OnlineOrder;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,11 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
     private final List<OnlineOrderUrl> onlineOrderUrlsList;
 
     //ImageAdapter생성자 (imageUrls 필드를 초기화)
+    @SuppressLint("NotifyDataSetChanged")
     public OnlineOrderAdapter(List<OnlineOrderUrl> onlineOrderUrlsList) {
+        setHasStableIds(true);
         this.onlineOrderUrlsList = onlineOrderUrlsList;
+        notifyDataSetChanged();
     }
 
     //onCreateViewHolder 메서드
@@ -34,7 +38,7 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // item_image 레이아웃을 inflate하여 View 객체 생성(LayoutInflater.from(context)사용)
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.online_order_recycler_item_pdf, parent, false);
         //생성된 뷰 객체를 ImageViewHolder 객체로 감싸서 반환
         return new ImageViewHolder(view);
     }
@@ -49,11 +53,11 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
         Glide.with(holder.itemView.getContext())
                 .load(onlineOrderUrl.getOnlineOrderUrl())
                 .apply(new RequestOptions().override(Target.SIZE_ORIGINAL))
-                .fitCenter()
+                .centerCrop()
                 .into(holder.photoView);
-
         holder.itemView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
     }
+
 
     //이미지 URL의 개수가 리사이클러뷰의 아이템 개수로 사용
     @Override
@@ -61,7 +65,6 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
         // 이미지 URL의 개수 반환
         return onlineOrderUrlsList.size();
     }
-
 
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {

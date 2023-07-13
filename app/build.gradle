@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+
     namespace 'com.wisethan.bestrefur1'
     compileSdk 33
 
@@ -20,6 +21,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def name = "bestrefur1"
+                    def versionName = variant.versionName
+                    outputFileName = "${name}_v${versionName}.apk"
+                }
+            }
         }
     }
     compileOptions {
@@ -29,19 +37,19 @@ android {
     viewBinding{
         enable = true
     }
+
 }
 
 dependencies {
 
-    // Retrofit 라이브러리
-    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
-    // Gson 변환기 라이브러리
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
-    // Scalars 변환기 라이브러리
-    implementation 'com.squareup.retrofit2:converter-scalars:2.6.4'
+    // Retrofit 라이브러리 추가
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // OkHttp 라이브러리 추가 (Retrofit의 기본 HTTP 클라이언트)
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
-
+    //Glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 

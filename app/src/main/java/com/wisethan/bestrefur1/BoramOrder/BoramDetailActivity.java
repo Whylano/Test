@@ -49,7 +49,8 @@ public class BoramDetailActivity extends AppCompatActivity {
 
         //doc = https://stackoverflow.com/questions/18471194/webview-in-scrollview-view-too-large-to-fit-into-drawing-cache-how-to-rewor
         // LAYER_TYPE_NONE: 보기는 정상적으로 렌더링되고 화면 범위 초과 버퍼에서 지원하지 않습니다. 기본 동작입니다.
-        // LAYER_TYPE_HARDWARE: 애플리케이션에서 하드웨어 가속을 사용하면 하드웨어에서 하드웨어 텍스처로 보기가 렌더링됩니다. 애플리케이션에서 하드웨어 가속을 사용하지 않으면 이 레이어 유형은 LAYER_TYPE_SOFTWARE와 동일하게 작동합니다.
+        // LAYER_TYPE_HARDWARE: 애플리케이션에서 하드웨어 가속을 사용하면 하드웨어에서 하드웨어 텍스처로 보기가 렌더링됩니다.
+        // 애플리케이션에서 하드웨어 가속을 사용하지 않으면 이 레이어 유형은 LAYER_TYPE_SOFTWARE와 동일하게 작동합니다.
         // LAYER_TYPE_SOFTWARE: 보기는 소프트웨어에서 비트 맵으로 렌더링됩니다.
         detail_image_view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         fab_Scroll_Top.setOnClickListener(v -> {

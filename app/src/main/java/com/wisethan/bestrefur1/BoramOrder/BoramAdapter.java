@@ -1,5 +1,6 @@
 package com.wisethan.bestrefur1.BoramOrder;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,12 @@ public class BoramAdapter extends RecyclerView.Adapter<BoramAdapter.BoramViewHol
 
     private final List<Boram> filteredBoramList;
 
+    @SuppressLint("NotifyDataSetChanged")
     public BoramAdapter(List<Boram> boramList) {
+        setHasStableIds(true);
         this.boramList = boramList;
         this.filteredBoramList = new ArrayList<>(boramList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -80,6 +84,7 @@ public class BoramAdapter extends RecyclerView.Adapter<BoramAdapter.BoramViewHol
                 return new FilterResults();
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 notifyDataSetChanged();
