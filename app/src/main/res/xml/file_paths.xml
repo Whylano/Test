@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 공유할 파일 경로 정의 -->
     <external-path
         name="external_files"

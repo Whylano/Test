@@ -43,7 +43,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             app:cornerRadius="10dp"
-            tools:ignore="VisualLintButtonSize,TextContrastCheck" />
+            tools:ignore="VisualLintButtonSize,TextSizeCheck,TextContrastCheck" />
 
 
         <Button
@@ -65,7 +65,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             app:cornerRadius="100dp"
-            tools:ignore="VisualLintButtonSize" />
+            tools:ignore="VisualLintButtonSize,TextSizeCheck" />
 
         <Button
             android:id="@+id/boram"

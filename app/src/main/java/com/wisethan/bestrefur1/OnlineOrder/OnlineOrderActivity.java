@@ -7,23 +7,28 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wisethan.bestrefur1.OnlineOrder.DTO.OnlineOrderDTO;
 import com.wisethan.bestrefur1.OnlineOrder.model.OnlineOrderUrl;
 import com.wisethan.bestrefur1.R;
-import com.wisethan.bestrefur1.common.NetworkUtils;
+import com.wisethan.bestrefur1.common.RetrofitClient;
 import com.wisethan.bestrefur1.databinding.ActivityOnlineOrderBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class OnlineOrderActivity extends AppCompatActivity {
@@ -49,17 +54,67 @@ public class OnlineOrderActivity extends AppCompatActivity {
         }
 
         imageUrlsList = new ArrayList<>();
-        new Thread(() -> {
-            // API 호출 및 JSON 데이터 가져오기
-            String apiUrl = "https://api.inventory.wisethan.com/catalogue/daemyung-online/getAll";
-            String jsonData = NetworkUtils.fetchJSONData(apiUrl);
-            parseAndSetData(jsonData);
-        }).start();
+
+        RetrofitClient retrofitAPI = new RetrofitClient();
+
+        // API 서비스 생성
+        Call<List<OnlineOrderDTO>> jsonArrayCall = retrofitAPI.retrofitAPI.getAllByOnlineOrder();
+        jsonArrayCall.enqueue(new Callback<List<OnlineOrderDTO>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<OnlineOrderDTO>> call, @NonNull Response<List<OnlineOrderDTO>> response) {
+                Log.d("Call request", call.request().toString());
+                Log.d("Call request header", call.request().headers().toString());
+                Log.d("Response raw header", response.headers().toString());
+                Log.d("Response raw", String.valueOf(response.raw().body()));
+                Log.d("Response code", String.valueOf(response.code()));
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        for (OnlineOrderDTO onlineOrderDTO : response.body()) {
+                            Log.e("onResponse", onlineOrderDTO.toString());
+                            String productImg = onlineOrderDTO.getOnlineOrderImgUrl();
+                            imageUrlsList.add(new OnlineOrderUrl(productImg));
+                            runOnUiThread(() -> {
+                                RecyclerView recyclerView = findViewById(R.id.online_image_recyclerview);
+                                //animtor 설정으로 속도 초기화하려했으나 화면 스크롤 끝부분에 animtor 작동이 안되서 중단
+                                //아이템 깜빡임 제거
+                                recyclerView.setItemAnimator(null);
+                                adapter = new OnlineOrderAdapter(imageUrlsList);
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(OnlineOrderActivity.this); //GridLayoutManager로 2열설정
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(layoutManager);
+                                recyclerView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                                //RecyclerView에 하드웨어 가속화가 설정되어있는지 확인
+                                Log.e(TAG, "하드웨어 가속화 중인가요 " + recyclerView.isHardwareAccelerated());
+                            });
+                        }
+                    } else {
+                        // 데이터가 없을때
+                        Toast.makeText(OnlineOrderActivity.this, "이미지가 없습니다", Toast.LENGTH_SHORT).show();
+                        Log.e("Response body is null", String.valueOf(response.errorBody()));
+                    }
+                } else {
+                    // 요청 실패
+                    Toast.makeText(OnlineOrderActivity.this, "이미지 가져오기 실패", Toast.LENGTH_SHORT).show();
+                    Log.e("Response errorBody", String.valueOf(response.errorBody()));
+                }
+            }
+
+
+            @Override
+            public void onFailure(@NonNull Call<List<OnlineOrderDTO>> call, @NonNull Throwable t) {
+                // 네트워크 오류 또는 기타 오류 처리
+                t.printStackTrace();
+                Toast.makeText(OnlineOrderActivity.this, "파일 업로드 실패", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
         // FloatingActionButton의 클릭 리스너 설정
         FloatingActionButton fabScrollTop = findViewById(R.id.fab_scroll_top);
         fabScrollTop.setOnClickListener(v -> {
             // 맨 위로 스크롤
-            binding.imageRecyclerview.smoothScrollToPosition(0);
+            binding.onlineImageRecyclerview.smoothScrollToPosition(0);
         });
     }
 
@@ -81,33 +136,5 @@ public class OnlineOrderActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void parseAndSetData(String jsonData) {
-        try {
-            // JSON 데이터 파싱하여 이미지 URL들을 모으기
-            JSONArray jsonArray = new JSONArray(jsonData);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String imageUrl = jsonObject.getString("product_img_url");
-                imageUrlsList.add(new OnlineOrderUrl(imageUrl));
-            }
-            runOnUiThread(() -> {
-                Log.e(TAG, imageUrlsList.get(0) + "json객체 데이터입니다");
-                //ArrayList 초기화
-                // 이미지 URL 목록 가져오기
-                //"imageUrls" 키로 전달된 이미지 URL 목록을 가져옴.
-                // 리사이클러뷰 설정
-                RecyclerView recyclerView = findViewById(R.id.image_recyclerview);
-                adapter = new OnlineOrderAdapter(imageUrlsList);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(OnlineOrderActivity.this);
-                recyclerView.setAdapter(adapter);
-                //리사이클러뷰의 레이아웃 매니저를 LinearLayoutManager로 설정합니다.
-                recyclerView.setLayoutManager(layoutManager);
-
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }

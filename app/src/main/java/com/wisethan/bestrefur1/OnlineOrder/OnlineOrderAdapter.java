@@ -1,6 +1,5 @@
 package com.wisethan.bestrefur1.OnlineOrder;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +24,8 @@ public class OnlineOrderAdapter extends RecyclerView.Adapter<OnlineOrderAdapter.
     private final List<OnlineOrderUrl> onlineOrderUrlsList;
 
     //ImageAdapter생성자 (imageUrls 필드를 초기화)
-    @SuppressLint("NotifyDataSetChanged")
     public OnlineOrderAdapter(List<OnlineOrderUrl> onlineOrderUrlsList) {
-        setHasStableIds(true);
         this.onlineOrderUrlsList = onlineOrderUrlsList;
-        notifyDataSetChanged();
     }
 
     //onCreateViewHolder 메서드

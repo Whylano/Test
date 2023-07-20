@@ -12,6 +12,7 @@ public class Boram {
         this.detailImgUrl = detailImgUrl;
         this.goodsName = goodsName;
     }
+
     public String getGoodsName() {
         return goodsName;
     }

@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wisethan.bestrefur1.BoramOrder.model.Boram;
 import com.wisethan.bestrefur1.R;
 
@@ -26,37 +27,38 @@ public class BoramAdapter extends RecyclerView.Adapter<BoramAdapter.BoramViewHol
 
     private final List<Boram> filteredBoramList;
 
-    @SuppressLint("NotifyDataSetChanged")
     public BoramAdapter(List<Boram> boramList) {
-        setHasStableIds(true);
         this.boramList = boramList;
         this.filteredBoramList = new ArrayList<>(boramList);
-        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public BoramViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_boram_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_boram_item, parent, false);
         return new BoramViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BoramAdapter.BoramViewHolder holder, int position) {
+
         Boram boram = this.filteredBoramList.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(boram.getProductImgUrl())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.goods_view);
 
         holder.itemView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         holder.goods_name.setText(boram.getGoodsName());
 
-        holder.itemView.setOnClickListener(v->{
+        holder.itemView.setOnClickListener(v -> {
             //클릭 이벤트 처리: 상세 화면으로 이동
             Intent intent = new Intent(holder.itemView.getContext(), BoramDetailActivity.class);
-            intent.putExtra("detailImageUrl",boram.getDetailImgUrl());
-            intent.putExtra("goodsNames",boram.getGoodsName());
+            intent.putExtra("detailImageUrl", boram.getDetailImgUrl());
+            intent.putExtra("goodsNames", boram.getGoodsName());
             holder.itemView.getContext().startActivity(intent);
+
         });
     }
 
@@ -72,11 +74,11 @@ public class BoramAdapter extends RecyclerView.Adapter<BoramAdapter.BoramViewHol
             protected FilterResults performFiltering(CharSequence constraint) {
                 String searchText = constraint.toString().toLowerCase(Locale.getDefault());
                 filteredBoramList.clear();
-                if(searchText.length()==0){
+                if (searchText.length() == 0) {
                     filteredBoramList.addAll(boramList);
-                }else {
-                    for(Boram item : boramList){
-                        if(item.getGoodsName().toLowerCase(Locale.getDefault()).contains(searchText)){
+                } else {
+                    for (Boram item : boramList) {
+                        if (item.getGoodsName().toLowerCase(Locale.getDefault()).contains(searchText)) {
                             filteredBoramList.add(item);
                         }
                     }
@@ -95,9 +97,11 @@ public class BoramAdapter extends RecyclerView.Adapter<BoramAdapter.BoramViewHol
     public static class BoramViewHolder extends RecyclerView.ViewHolder {
         ImageView goods_view;
         TextView goods_name;
+
         public BoramViewHolder(@NonNull View itemView) {
             super(itemView);
             goods_view = itemView.findViewById(R.id.goods_view);
+
             goods_name = itemView.findViewById(R.id.goods_name);
         }
     }

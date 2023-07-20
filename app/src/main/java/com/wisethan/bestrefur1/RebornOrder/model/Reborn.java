@@ -24,5 +24,4 @@ public class Reborn {
         return goodsName;
     }
 
-
 }

@@ -222,9 +222,7 @@ public class UploadOnlineOrderActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // 파일 업로드 성공
                     Toast.makeText(UploadOnlineOrderActivity.this, "파일 업로드 성공", Toast.LENGTH_SHORT).show();
-                    //the response-body is already parseable to your ResponseBody object
                     ResponseBody responseBody = response.body();
-                    //you can do whatever with the response body now...
                     String responseBodyString;
                     try {
                         assert responseBody != null;
@@ -232,10 +230,9 @@ public class UploadOnlineOrderActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    Log.d("Response body", responseBodyString);
+                    Log.e("Response body", responseBodyString);
                     progressBar.setVisibility(View.INVISIBLE); // To hide the ProgressBar
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//                    finish();
                     Intent intent = new Intent(UploadOnlineOrderActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
