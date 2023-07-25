@@ -143,8 +143,8 @@ public class BoramActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed(); // 뒤로 가기 버튼 동작
-            return true; //ture를 반환
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

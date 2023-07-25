@@ -48,14 +48,6 @@ public class TheRebornAdapter extends RecyclerView.Adapter<TheRebornAdapter.Rebo
 
         Glide.with(holder.itemView.getContext())
                 .load(reborn.getProductImgUrl())
-                //기본적으로 메모리 캐싱을 하기때문에, 메모리 캐싱을 위해 추가적으로 할 일은 없다.
-                //단, URL 이미지 로딩 시 한번 로드한 이미지는 chache 에 저장되어 서버에서 해당 이미지를 변경해도
-                //App 의 이미지는 갱신되지 않는다.
-                //이런 경우, skipMemoryCache(true) 로 메모리 캐시를 사용하지 않을 수 있어 skipMemoryCache()메서드를 사용.
-                // 디스크캐시 건너띄기 iskCacheStrategy(DiskCacheStrategy.NONE)
-                // 둘다 건너띄기는 같이 쓰면됨
-                // 일반적으로 캐시를 건너 뛰지 않는걸 권장.
-                // 이미지를 검색, 디코딩 및 변환하여 새 썸네일을 만드는 것보다 캐시에서 이미지를 load하는 것이 빠름
                 .skipMemoryCache(true)// 메모리 캐시 저장 off
                 .diskCacheStrategy(DiskCacheStrategy.ALL)// 디스크 캐시 저장
                 .into(holder.goods_view); // Glide를 사용하여 이미지 로드
@@ -83,7 +75,6 @@ public class TheRebornAdapter extends RecyclerView.Adapter<TheRebornAdapter.Rebo
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String searchText = constraint.toString().toLowerCase(Locale.getDefault()); // 검색어를 소문자로 변환
-                //List<Reborn> filteredGoodsName = new ArrayList<>();
                 filteredRebornList.clear();
                 if (searchText.length() == 0) {
                     // 검색어가 비어있는 경우, 전체 상품명과 이미지 URL을 필터링된 리스트에 추가

@@ -89,7 +89,7 @@ public class TheRebornActivity extends AppCompatActivity {
                                 Log.e(TAG, "하드웨어 가속화 중인가요 " + recyclerView.isHardwareAccelerated());
                             });
                         }
-                    }else {
+                    } else {
                         // 데이터가 없을때
                         Toast.makeText(TheRebornActivity.this, "이미지가 없습니다", Toast.LENGTH_SHORT).show();
                         Log.e("Response body is null", String.valueOf(response.errorBody()));

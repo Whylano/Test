@@ -56,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
     // BoramButtonClickListener 클래스
-    class BoramButtonClickListener implements View.OnClickListener{
+    class BoramButtonClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {

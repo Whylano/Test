@@ -161,17 +161,6 @@ public class UploadOnlineOrderActivity extends AppCompatActivity {
                     PDFFileAdapter.notifyDataSetChanged();
 
                 }
-//                else if (data.getClipData() != null) {    // 이미지를 여러장 선택한 경우
-//                    int count = data.getClipData().getItemCount();
-//                    for (int i = 0; i < count; i++) {
-//                        Uri uri = data.getClipData().getItemAt(i).getUri();
-//                        selectedFiles.add(uri);
-//                        Log.e(TAG, "PDF 파일 주소 경로입니다" + uri);
-//                    }
-//                    PDFFileAdapter.notifyDataSetChanged();
-//                    Toast.makeText(this, "이미 파일을 선택하셨습니다", Toast.LENGTH_SHORT).show();
-//                    finish();
-//                }
             }
         } else {
             Toast.makeText(this, "파일 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();

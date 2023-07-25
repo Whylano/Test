@@ -69,8 +69,8 @@ public class PDFFileAdapter extends RecyclerView.Adapter<PDFFileAdapter.FileView
                     Bitmap bitmap = Bitmap.createBitmap(page.getWidth(), page.getHeight(), Bitmap.Config.ARGB_8888);
                     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
                     page.close();
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(20,20,20,20);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(20, 20, 20, 20);
                     ImageView imageView = new ImageView(context);
                     imageView.setLayoutParams(layoutParams);
                     imageView.setImageBitmap(bitmap);

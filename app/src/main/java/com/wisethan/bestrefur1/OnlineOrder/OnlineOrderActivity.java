@@ -43,12 +43,10 @@ public class OnlineOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // 툴바 설정
 
         // Up 버튼 활성화
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            //액션바가 null이 아닌 경우, Up 버튼을 활성화하고 커스텀 제목("온라인 주문")을 설정
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.online_order_title);
         }
@@ -75,8 +73,6 @@ public class OnlineOrderActivity extends AppCompatActivity {
                             imageUrlsList.add(new OnlineOrderUrl(productImg));
                             runOnUiThread(() -> {
                                 RecyclerView recyclerView = findViewById(R.id.online_image_recyclerview);
-                                //animtor 설정으로 속도 초기화하려했으나 화면 스크롤 끝부분에 animtor 작동이 안되서 중단
-                                //아이템 깜빡임 제거
                                 recyclerView.setItemAnimator(null);
                                 adapter = new OnlineOrderAdapter(imageUrlsList);
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(OnlineOrderActivity.this); //GridLayoutManager로 2열설정
@@ -130,7 +126,6 @@ public class OnlineOrderActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         } else if (item.getItemId() == R.id.action_add_online) {
-            // UploadOnlineOrderActivity로 이동하는 코드
             Intent intent = new Intent(OnlineOrderActivity.this, UploadOnlineOrderActivity.class);
             startActivity(intent);
             return true;
